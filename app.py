@@ -493,11 +493,12 @@ elif example:
             # col[1].markdown(f"<div style='text-align: center;'>K2(D)<br><span style='font-weight:bold;'>{r[1]}</span></div>", unsafe_allow_html=True)
             # col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
             # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
+            
             def color_survived(val):
                 color = 'red' if val==0 else 'yellow' if val==1 else 'green'
                 return f'background-color: {color}'
 
-            st.table(pd.DataFrame({'K2@': [a.two_point_angle], 'K2(D)': [a.two_point_mean_max], 'K1@': [a.two_point_pend_angle], 'K1(D)': [a.two_point_pend_mean]}).style.applymap(color_survived, subset=['Sentiment']))
+            st.table(pd.DataFrame({'K2@': [a.two_point_angle], 'K2(D)': [a.two_point_mean_max], 'K1@': [a.two_point_pend_angle], 'K1(D)': [a.two_point_pend_mean]}).style.applymap(color_survived, subset=['K2@']))
 
             plot(a)
 else:
