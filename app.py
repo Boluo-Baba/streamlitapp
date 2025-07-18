@@ -513,7 +513,7 @@ elif example:
                          hide_index=True)
             st.markdown("**EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975)! K values reported by EOZ merging method is recommanded! BTW, default K values from smoothed corneal topography is also given.**")
 
-            df = pd.DataFrame({'A': ['default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}°         K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]} D @ {r2[2]}°         K2: {r2[1]} D @ {r2[0]}°'],
+            df = pd.DataFrame({'A': ['default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
