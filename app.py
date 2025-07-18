@@ -505,7 +505,7 @@ elif example:
             # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
             
             st.dataframe(pd.DataFrame({'EOZ%': [round(a.eoz_percent, 3)], 'D$_EOZ$/mm': [round(a.incircle_diatance, 3)],
-                                       'Dmin': [round(a.min_distance, 3)]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
+                                       'Dmin': [round(a.min_distance, 3)]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['D$_EOZ$/mm']),
                          hide_index=True)
 
             plot(a)
