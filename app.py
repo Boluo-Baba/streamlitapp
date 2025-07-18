@@ -504,9 +504,15 @@ elif example:
             # col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
             # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
             
-            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 3))], 'D$_EOZ$/mm': [str(round(a.incircle_diatance, 3))],
-                                       'Dmin': [str(round(a.min_distance, 3))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['D$_EOZ$/mm']),
+            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 4))], 'DEOZ/mm': [str(round(a.incircle_diatance, 4))],
+                                       'Dmin': [str(round(a.min_distance, 4))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
+                         use_container_width=False,
                          hide_index=True)
+        st.markdown(f"""
+            <h2 style="text-align: center; border-bottom: 1px solid black; font-weight: bold; font-size: 10px; margin-bottom: 1rem; margin-top: 1.1rem;">
+            EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975), K values reported by EOZ merging method is recommanded!
+            </h2>
+            """, unsafe_allow_html=True)
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
