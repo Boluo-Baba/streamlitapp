@@ -419,9 +419,9 @@ title = "EOZ Merging Method"
 
 def color_survived(val, thres, type):
     if type == 'small':
-        color = 'pink' if val < thres else None
+        color = 'pink' if float(val) < thres else None
     if type == 'big':
-        color = 'pink' if val > thres else None
+        color = 'pink' if float(val) > thres else None
     return f'background-color: {color}'
 
 color_survived_eoz = partial(color_survived, thres=0.9502, type='small')
@@ -504,10 +504,11 @@ elif example:
             # col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
             # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
             
-            st.dataframe(pd.DataFrame({'EOZ%': [round(a.eoz_percent, 3)], 'D$_EOZ$/mm': [round(a.incircle_diatance, 3)],
-                                       'Dmin': [round(a.min_distance, 3)]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['D$_EOZ$/mm']),
+            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 3))], 'D$_EOZ$/mm': [str(round(a.incircle_diatance, 3))],
+                                       'Dmin': [str(round(a.min_distance, 3))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['D$_EOZ$/mm']),
                          hide_index=True)
-
+    with st.expander("**Figures**", True):
+        with st.spinner("Wait for it...", show_time=True):
             plot(a)
 else:
     with st.expander("**Calculate result**", True):
