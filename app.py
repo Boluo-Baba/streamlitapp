@@ -415,7 +415,7 @@ def plot(a):
 
         
 # UI部分
-title = "This is title"
+title = "EOZ Merging Method"
 
 st.set_page_config(page_title=title, layout="wide")
 
@@ -445,7 +445,7 @@ with st.sidebar:
     <h2 style="text-align: center; border-bottom: 1px solid black; font-weight: bold; font-size: 30px; margin-bottom: 1rem; margin-top: 1.1rem;">User input</h2>
     """, unsafe_allow_html=True)
 
-    file = st.file_uploader("**Upload your csv(CSV) file**", type=["csv", "CSV"])
+    file = st.file_uploader("**Upload your corneal topography (.csv) file**", type=["csv", "CSV"])
     
     if file:
         button1 = st.button("Calculate", use_container_width=True, type="primary")
@@ -468,10 +468,10 @@ if button1:
             r = [round(i, 3) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             
             col = st.columns(4, border=True)
-            col[0].markdown(f"<div style='text-align: center;'>two_point_angle<br><span style='font-weight:bold;'>{r[0]}</span></div>", unsafe_allow_html=True)
-            col[1].markdown(f"<div style='text-align: center;'>two_point_mean_max<br><span style='font-weight:bold;'>{r[1]}</span></div>", unsafe_allow_html=True)
-            col[2].markdown(f"<div style='text-align: center;'>two_point_pend_angle<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
-            col[3].markdown(f"<div style='text-align: center;'>two_point_pend_mean<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
+            col[0].markdown(f"<div style='text-align: center;'>K2@<br><span style='font-weight:bold;'>{r[0]}</span></div>", unsafe_allow_html=True)
+            col[1].markdown(f"<div style='text-align: center;'>K2(D)<br><span style='font-weight:bold;'>{r[1]}</span></div>", unsafe_allow_html=True)
+            col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
+            col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
             
             plot(a)
 elif example:
