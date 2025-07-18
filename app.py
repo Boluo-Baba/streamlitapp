@@ -382,7 +382,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Fig 1")
+    plt.title("Figure 1. Corneal topography")
     col1[0].pyplot(fig, use_container_width=True)
 
     fig = plt.figure(dpi=300)
@@ -391,7 +391,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Fig 2")
+    plt.title("Figure 2. Smoonthed topography and its flat point")
     col1[1].pyplot(fig, use_container_width=True)
     
 
@@ -401,7 +401,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Fig 3")
+    plt.title("Figure 3. EOZ, max inscribed circle and its center")
     col2[0].pyplot(fig, use_container_width=True)
     
     fig = plt.figure(dpi=300)
@@ -410,7 +410,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Fig 4")
+    plt.title("Figure 4. Mergring EOZ and a 3.5-mm circle centered on the apex, K1 and K2")
     col2[1].pyplot(fig, use_container_width=True)
 
         
@@ -486,14 +486,19 @@ elif example:
     with st.expander("**Example result**", True):
         with st.spinner("Wait for it...", show_time=True):
             a = Patient("source/Li_Minfeng_OD_27032023_094446_CUR.CSV")
-            r = [round(i, 3) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
+            # r = [round(i, 3) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             
-            col = st.columns(4, border=True)
-            col[0].markdown(f"<div style='text-align: center;'>two_point_angle<br><span style='font-weight:bold;'>{r[0]}</span></div>", unsafe_allow_html=True)
-            col[1].markdown(f"<div style='text-align: center;'>two_point_mean_max<br><span style='font-weight:bold;'>{r[1]}</span></div>", unsafe_allow_html=True)
-            col[2].markdown(f"<div style='text-align: center;'>two_point_pend_angle<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
-            col[3].markdown(f"<div style='text-align: center;'>two_point_pend_mean<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
-            
+            # col = st.columns(4, border=True)
+            # col[0].markdown(f"<div style='text-align: center;'>K2@<br><span style='font-weight:bold;'>{r[0]}</span></div>", unsafe_allow_html=True)
+            # col[1].markdown(f"<div style='text-align: center;'>K2(D)<br><span style='font-weight:bold;'>{r[1]}</span></div>", unsafe_allow_html=True)
+            # col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
+            # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
+            def color_survived(val):
+                color = 'red' if val==0 else 'yellow' if val==1 else 'green'
+                return f'background-color: {color}'
+
+            st.table(pd.DataFrame({'K2@': [a.two_point_angle], 'K2(D)': [a.two_point_mean_max], 'K1@': [a.two_point_pend_angle], 'K1(D)': [a.two_point_pend_mean]}).style.applymap(color_survived, subset=['Sentiment']))
+
             plot(a)
 else:
     with st.expander("**Calculate result**", True):
