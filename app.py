@@ -472,9 +472,9 @@ with st.sidebar:
         )
 
     st.markdown("**How to get the file:\n
-                (1) Settings>Miscellaneous Settings>Export, find directory ("C:\PENTACAM\PENTACAM.EXP"), select "Curvature Map Matrix (Axial/Sagittal)", click "OK".\n
-                (2) Setting>Export Data, wait, and click "OK".\n
-                (3) Find the "patient name_eye_XXX_CUR.csv" file in the directory.**")
+                (1) Settings>Miscellaneous Settings>Export, find directory (\"C:\PENTACAM\PENTACAM.EXP\"), select \"Curvature Map Matrix (Axial/Sagittal)\", click \"OK\".\n
+                (2) Setting>Export Data, wait, and click \"OK\".\n
+                (3) Find the \"patient name_eye_XXX_CUR.csv\" file in the directory.**")
     
 if button1:
     with st.expander("**Calculate result**", True):
