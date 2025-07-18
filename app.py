@@ -410,7 +410,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Mergring EOZ and a 3.5-mm circle centered on the apex, K1 and K2")
+    plt.title("Mergring EOZ, K1 and K2")
     col2[1].pyplot(fig, use_container_width=True)
 
         
@@ -504,15 +504,16 @@ elif example:
             # col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
             # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
             
-            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 4))], 'DEOZ/mm': [str(round(a.incircle_diatance, 4))],
-                                       'Dmin': [str(round(a.min_distance, 4))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
+            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 6))], 'DEOZ/mm': [str(round(a.incircle_diatance, 6))],
+                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
                          use_container_width=False,
                          hide_index=True)
-        st.markdown(f"""
-            <h2 style="text-align: center; border-bottom: 1px solid black; font-weight: bold; font-size: 10px; margin-bottom: 1rem; margin-top: 1.1rem;">
-            EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975), K values reported by EOZ merging method is recommanded!
-            </h2>
-            """, unsafe_allow_html=True)
+            st.markdown("**EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975)! K values reported by EOZ merging method is recommanded! BTW, default K values from smoothed corneal topography is also given.**")
+        # st.markdown(f"""
+        #     <h2 style="text-align: center; border-bottom: 1px solid black; font-weight: bold; font-size: 30px; margin-bottom: 1rem; margin-top: 1.1rem;">
+        #     EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975)! K values reported by EOZ merging method is recommanded! BTW, default K values from smoothed corneal topography is also given.
+        #     </h2>
+        #     """, unsafe_allow_html=True)
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
