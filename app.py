@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import math
 import matplotlib.colors as colors
 import seaborn as sns
+from functools import partial
 
 # 算法部分
 class Patient:
@@ -382,7 +383,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Figure 1. Corneal topography")
+    plt.title("Corneal topography")
     col1[0].pyplot(fig, use_container_width=True)
 
     fig = plt.figure(dpi=300)
@@ -391,17 +392,16 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Figure 2. Smoonthed topography and its flat point")
+    plt.title("Smoonthed topography and its flat point")
     col1[1].pyplot(fig, use_container_width=True)
     
-
     fig = plt.figure(dpi=300)
     plt.imshow(a.df_incircle.iloc[10: -9, 8: -10], cmap=cmap, interpolation='nearest', vmin=32, vmax=47,)
     plt.xticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Figure 3. EOZ, max inscribed circle and its center")
+    plt.title("EOZ, max inscribed circle and its center")
     col2[0].pyplot(fig, use_container_width=True)
     
     fig = plt.figure(dpi=300)
@@ -410,12 +410,22 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Figure 4. Mergring EOZ and a 3.5-mm circle centered on the apex, K1 and K2")
+    plt.title("Mergring EOZ and a 3.5-mm circle centered on the apex, K1 and K2")
     col2[1].pyplot(fig, use_container_width=True)
 
         
 # UI部分
 title = "EOZ Merging Method"
+
+def color_survived(val, thres, type):
+    if type == 'small':
+        color = 'red' if val < val else None
+    if type == 'big':
+        color = 'red' if val > val else None
+    return f'background-color: {color}'
+
+color_survived_eoz = partial(color_survived, thres=0.9502, type='small')
+color_survived_deoz = partial(color_survived, thres=1.0975, type='big')
 
 st.set_page_config(page_title=title, layout="wide")
 
@@ -494,11 +504,7 @@ elif example:
             # col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
             # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
             
-            def color_survived(val):
-                color = 'red' if val==0 else 'yellow' if val==1 else 'green'
-                return f'background-color: {color}'
-
-            st.table(pd.DataFrame({'K2@': [a.two_point_angle], 'K2(D)': [a.two_point_mean_max], 'K1@': [a.two_point_pend_angle], 'K1(D)': [a.two_point_pend_mean]}).style.applymap(color_survived, subset=['K2@']))
+            st.dataframe(pd.DataFrame({'EOZ%': [a.eoz_percent], 'DEOZ/mm': [a.incircle_diatance]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']))
 
             plot(a)
 else:
