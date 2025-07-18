@@ -470,6 +470,11 @@ with st.sidebar:
             use_container_width=True,
             hide_index=True
         )
+
+    st.markdown("**How to get the file: 
+                (1) Settings>Miscellaneous Settings>Export, find directory ("C:\PENTACAM\PENTACAM.EXP"), select "Curvature Map Matrix (Axial/Sagittal)", click "OK".
+                (2) Setting>Export Data, wait, and click "OK".
+                (3) Find the "patient name_eye_XXX_CUR.csv" file in the directory.**")
     
 if button1:
     with st.expander("**Calculate result**", True):
@@ -496,7 +501,8 @@ elif example:
     with st.expander("**Example result**", True):
         with st.spinner("Wait for it...", show_time=True):
             a = Patient("source/Li_Minfeng_OD_27032023_094446_CUR.CSV")
-            # r = [round(i, 3) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
+            r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
+            r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
             # col = st.columns(4, border=True)
             # col[0].markdown(f"<div style='text-align: center;'>K2@<br><span style='font-weight:bold;'>{r[0]}</span></div>", unsafe_allow_html=True)
@@ -509,11 +515,10 @@ elif example:
                          use_container_width=False,
                          hide_index=True)
             st.markdown("**EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975)! K values reported by EOZ merging method is recommanded! BTW, default K values from smoothed corneal topography is also given.**")
-        # st.markdown(f"""
-        #     <h2 style="text-align: center; border-bottom: 1px solid black; font-weight: bold; font-size: 30px; margin-bottom: 1rem; margin-top: 1.1rem;">
-        #     EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975)! K values reported by EOZ merging method is recommanded! BTW, default K values from smoothed corneal topography is also given.
-        #     </h2>
-        #     """, unsafe_allow_html=True)
+, 
+            st.table(pd.DataFrame({'A': ['default', 'EOZ merging method'], 'B': [f'K1: {r1[3]} D @ {r1[2]}°   K2: {r1[1]} D @ {r1[0]}°', f'K1: {r2[3]} D @ {r2[2]}°   K2: {r2[1]} D @ {r2[0]}°'],
+                                   'C': ['', "✅"]}).values)
+    
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
