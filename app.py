@@ -488,7 +488,7 @@ if button1:
             plot(a)
 elif example:
     with st.sidebar:
-        file = "Li_Minfeng_OD_27032023_094446_CUR.CSV"
+        file = "LastName_FirstName_OD_27032023_094446_CUR.CSV"
         st.dataframe(
             pd.DataFrame([{"name":'_'.join(file.split("_")[0:2]), "eye":file.split("_")[2]}]),
             use_container_width=True,
@@ -501,20 +501,20 @@ elif example:
             r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
-            # col = st.columns(4, border=True)
-            # col[0].markdown(f"<div style='text-align: center;'>K2@<br><span style='font-weight:bold;'>{r[0]}</span></div>", unsafe_allow_html=True)
-            # col[1].markdown(f"<div style='text-align: center;'>K2(D)<br><span style='font-weight:bold;'>{r[1]}</span></div>", unsafe_allow_html=True)
-            # col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
-            # col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
-            
             st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 6))], 'DEOZ/mm': [str(round(a.incircle_diatance, 6))],
                                        'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
                          use_container_width=False,
                          hide_index=True)
-            st.markdown("**EOZ is decentered(EOZ% < 0.9502 or DEOZ > 1.0975)! K values reported by EOZ merging method is recommanded! BTW, default K values from smoothed corneal topography is also given.**")
 
-            df = pd.DataFrame({'A': ['default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+            if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
+                st.markdown("**EOZ is decentered! K values reported by EOZ merging method is recommanded!**")
+                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
+            else:
+                st.markdown("**EOZ is centered! Default K values from smoothed corneal topography is recommanded!**")
+                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                               'C': ["✅", '']})
+                
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
                 html += "<tr>"
