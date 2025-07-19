@@ -477,15 +477,44 @@ if button1:
     with st.expander("**Calculate result**", True):
         with st.spinner("Wait for it...", show_time=True):
             a = Patient(file)
-            r = [round(i, 3) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
+            r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
+            r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
-            col = st.columns(4, border=True)
-            col[0].markdown(f"<div style='text-align: center;'>K2@<br><span style='font-weight:bold;'>{r[0]}</span></div>", unsafe_allow_html=True)
-            col[1].markdown(f"<div style='text-align: center;'>K2(D)<br><span style='font-weight:bold;'>{r[1]}</span></div>", unsafe_allow_html=True)
-            col[2].markdown(f"<div style='text-align: center;'>K1@<br><span style='font-weight:bold;'>{r[2]}</span></div>", unsafe_allow_html=True)
-            col[3].markdown(f"<div style='text-align: center;'>K1(D)<br><span style='font-weight:bold;'>{r[3]}</span></div>", unsafe_allow_html=True)
-            
+            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 6))], 'DEOZ/mm': [str(round(a.incircle_diatance, 6))],
+                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
+                         use_container_width=False,
+                         hide_index=True)
+
+            if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
+                st.markdown(
+                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by EOZ merging method is recommanded!</p>',
+                    unsafe_allow_html=True
+                )
+                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                               'C': ['', "✅"]})
+            else:
+                st.markdown("**EOZ is centered! Default K values from smoothed corneal topography is recommanded!**")
+                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                               'C': ["✅", '']})
+                
+            html = "<table style='border-collapse: collapse;'>"
+            for row in df.values:
+                html += "<tr>"
+                for val in row:
+                    html += f"<td style='border:1px solid #ddd; padding:4px 8px;'>{val}</td>"
+                html += "</tr>"
+            html += "</table>"
+            st.markdown(html, unsafe_allow_html=True)
+
+            st.markdown(
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when EOZ% < 0.9502 or DEOZ > 1.0975mm. EOZ is centered when EOZ% > 0.9502 and DEOZ < 1.0975mm.</p>',
+                    unsafe_allow_html=True
+            )
+    
+    with st.expander("**Figures**", True):
+        with st.spinner("Wait for it...", show_time=True):
             plot(a)
+            
 elif example:
     with st.sidebar:
         file = "LastName_FirstName_OD_27032023_094446_CUR.CSV"
@@ -511,7 +540,6 @@ elif example:
                     '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by EOZ merging method is recommanded!</p>',
                     unsafe_allow_html=True
                 )
-                st.markdown("**EOZ is decentered! K values reported by EOZ merging method is recommanded!**")
                 df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
             else:
