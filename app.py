@@ -507,6 +507,10 @@ elif example:
                          hide_index=True)
 
             if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
+                st.markdown(
+                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by EOZ merging method is recommanded!</p>',
+                    unsafe_allow_html=True
+                )
                 st.markdown("**EOZ is decentered! K values reported by EOZ merging method is recommanded!**")
                 df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
@@ -523,6 +527,11 @@ elif example:
                 html += "</tr>"
             html += "</table>"
             st.markdown(html, unsafe_allow_html=True)
+
+            st.markdown(
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when EOZ% < 0.9502 or DEOZ > 1.0975mm. EOZ is centered when EOZ% > 0.9502 and DEOZ < 1.0975mm.</p>',
+                    unsafe_allow_html=True
+            )
     
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
