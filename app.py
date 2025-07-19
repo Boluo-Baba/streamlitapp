@@ -497,7 +497,7 @@ elif example:
         
     with st.expander("**Example result**", True):
         with st.spinner("Wait for it...", show_time=True):
-            a = Patient("source/Li_Minfeng_OD_27032023_094446_CUR.CSV")
+            a = Patient("source/LastName_FirstName_OD_27032023_094446_CUR.CSV")
             r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
