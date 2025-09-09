@@ -415,7 +415,7 @@ def plot(a):
 
         
 # UI部分
-title = "EOZ Merging Method"
+title = "Ablation Guided K Measurements"
 
 def color_survived(val, thres, type):
     if type == 'small':
@@ -480,21 +480,21 @@ if button1:
             r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
-            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 6))], 'DEOZ/mm': [str(round(a.incircle_diatance, 6))],
-                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
+            st.dataframe(pd.DataFrame({'index P': [str(round(a.eoz_percent, 6))], 'index D/mm': [str(round(a.incircle_diatance, 6))],
+                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['index P']).applymap(color_survived_deoz, subset=['index D/mm']),
                          use_container_width=False,
                          hide_index=True)
 
             if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
                 st.markdown(
-                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by EOZ merging method is recommanded!</p>',
+                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                     unsafe_allow_html=True
                 )
-                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
             else:
                 st.markdown("**EOZ is centered! Default K values from smoothed corneal topography is recommanded!**")
-                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ["✅", '']})
                 
             html = "<table style='border-collapse: collapse;'>"
@@ -507,7 +507,7 @@ if button1:
             st.markdown(html, unsafe_allow_html=True)
 
             st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when EOZ% < 0.9502 or DEOZ > 1.0975mm. EOZ is centered when EOZ% > 0.9502 and DEOZ < 1.0975mm.</p>',
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when index P < 0.9502 or index D > 1.0975mm. EOZ is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
                     unsafe_allow_html=True
             )
     
@@ -530,21 +530,21 @@ elif example:
             r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
-            st.dataframe(pd.DataFrame({'EOZ%': [str(round(a.eoz_percent, 6))], 'DEOZ/mm': [str(round(a.incircle_diatance, 6))],
-                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['EOZ%']).applymap(color_survived_deoz, subset=['DEOZ/mm']),
+            st.dataframe(pd.DataFrame({'index P': [str(round(a.eoz_percent, 6))], 'index D/mm': [str(round(a.incircle_diatance, 6))],
+                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['index P']).applymap(color_survived_deoz, subset=['index D/mm']),
                          use_container_width=False,
                          hide_index=True)
 
             if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
                 st.markdown(
-                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by EOZ merging method is recommanded!</p>',
+                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                     unsafe_allow_html=True
                 )
-                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
             else:
                 st.markdown("**EOZ is centered! Default K values from smoothed corneal topography is recommanded!**")
-                df = pd.DataFrame({'A': ['Default', 'EOZ merging method'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ["✅", '']})
                 
             html = "<table style='border-collapse: collapse;'>"
@@ -557,7 +557,7 @@ elif example:
             st.markdown(html, unsafe_allow_html=True)
 
             st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when EOZ% < 0.9502 or DEOZ > 1.0975mm. EOZ is centered when EOZ% > 0.9502 and DEOZ < 1.0975mm.</p>',
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when index P < 0.9502 or index D > 1.0975mm. EOZ is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
                     unsafe_allow_html=True
             )
     
@@ -570,3 +570,4 @@ else:
         
         col = st.columns([1, 3, 1])
         col[1].image("source/loading.gif", use_container_width=True)
+
