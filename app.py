@@ -392,7 +392,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Smoonthed topography and its flat point")
+    plt.title("Smoonthed topography and its Kmin")
     col1[1].pyplot(fig, use_container_width=True)
     
     fig = plt.figure(dpi=300)
@@ -401,7 +401,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("EOZ, max inscribed circle and its center")
+    plt.title("Personalized area, max inscribed circle and its center")
     col2[0].pyplot(fig, use_container_width=True)
     
     fig = plt.figure(dpi=300)
@@ -410,7 +410,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Mergring EOZ, K1 and K2")
+    plt.title("Mergring personalized area, K1 and K2")
     col2[1].pyplot(fig, use_container_width=True)
 
         
@@ -487,13 +487,13 @@ if button1:
 
             if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
                 st.markdown(
-                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
+                    '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                     unsafe_allow_html=True
                 )
                 df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
             else:
-                st.markdown("**EOZ is centered! Default K values from smoothed corneal topography is recommanded!**")
+                st.markdown("**Personalized area is centered! Default K values from smoothed corneal topography is recommanded!**")
                 df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ["✅", '']})
                 
@@ -507,7 +507,7 @@ if button1:
             st.markdown(html, unsafe_allow_html=True)
 
             st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when index P < 0.9502 or index D > 1.0975mm. EOZ is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D > 1.0975mm. Personalized area is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
                     unsafe_allow_html=True
             )
     
@@ -537,13 +537,13 @@ elif example:
 
             if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
                 st.markdown(
-                    '<p style="color:black; font-weight:bold; font-size:30px;">EOZ is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
+                    '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                     unsafe_allow_html=True
                 )
                 df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ['', "✅"]})
             else:
-                st.markdown("**EOZ is centered! Default K values from smoothed corneal topography is recommanded!**")
+                st.markdown("**Personalized area is centered! Default K values from smoothed corneal topography is recommanded!**")
                 df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
                                'C': ["✅", '']})
                 
@@ -557,7 +557,7 @@ elif example:
             st.markdown(html, unsafe_allow_html=True)
 
             st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">EOZ is decentered when index P < 0.9502 or index D > 1.0975mm. EOZ is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D > 1.0975mm. Personalized area is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
                     unsafe_allow_html=True
             )
     
@@ -570,4 +570,5 @@ else:
         
         col = st.columns([1, 3, 1])
         col[1].image("source/loading.gif", use_container_width=True)
+
 
