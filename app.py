@@ -517,10 +517,9 @@ if button1:
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
 
-    with st.expander("**Key Intermediate Variables**", True):
-
     df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': [a.incircle_position]})
-    html = "<table style='border-collapse: collapse;'>"
+    with st.expander("**Key Intermediate Variables**", True):
+        html = "<table style='border-collapse: collapse;'>"
         for row in df.values:
             html += "<tr>"
             for val in row:
