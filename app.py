@@ -577,6 +577,18 @@ elif example:
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
+
+    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': [a.incircle_position]})
+    with st.expander("**Key Intermediate Variables**", True):
+        html = "<table style='border-collapse: collapse;'>"
+        for row in df.values:
+            html += "<tr>"
+            for val in row:
+                html += f"<td style='border:1px solid #ddd; padding:4px 8px;'>{val}</td>"
+            html += "</tr>"
+        html += "</table>"
+        st.markdown(html, unsafe_allow_html=True)
+
 else:
     with st.expander("**Calculate result**", True):
         st.warning("**Please input csv and click 'Calculate' button to start, or click 'Example' button to start a demo!**")
