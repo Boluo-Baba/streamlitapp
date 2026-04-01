@@ -197,6 +197,8 @@ class Patient:
         self.df_incircle.iloc[self.point_list[index_][0] + 1, self.point_list[index_][1] - 1] = np.nan
         self.df_incircle.iloc[self.point_list[index_][0] + 1, self.point_list[index_][1]] = np.nan
         self.df_incircle.iloc[self.point_list[index_][0] + 1, self.point_list[index_][1] + 1] = np.nan
+
+        self.incircle_position = (self.df_incircle.columns[self.point_list[index_][1]], self.df_incircle.index[self.point_list[index_][0]])
     
     def find_two_point_max(self):
         self.edge_para_df['two_point_mean'] = np.nan
@@ -514,6 +516,18 @@ if button1:
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
+
+    with st.expander("**Key Intermediate Variables**", True):
+
+    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': [a.incircle_position]})
+    html = "<table style='border-collapse: collapse;'>"
+        for row in df.values:
+            html += "<tr>"
+            for val in row:
+                html += f"<td style='border:1px solid #ddd; padding:4px 8px;'>{val}</td>"
+            html += "</tr>"
+        html += "</table>"
+        st.markdown(html, unsafe_allow_html=True)
             
 elif example:
     with st.sidebar:
