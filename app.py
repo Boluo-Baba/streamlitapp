@@ -517,7 +517,7 @@ if button1:
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
 
-    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': [a.incircle_position]})
+    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': ['(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')']})
     with st.expander("**Key Intermediate Variables**", True):
         html = "<table style='border-collapse: collapse;'>"
         for row in df.values:
@@ -578,7 +578,7 @@ elif example:
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
 
-    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': [a.incircle_position]})
+    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': ['(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')']})
     with st.expander("**Key Intermediate Variables**", True):
         html = "<table style='border-collapse: collapse;'>"
         for row in df.values:
