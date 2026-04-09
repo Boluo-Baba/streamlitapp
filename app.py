@@ -198,7 +198,7 @@ class Patient:
         self.df_incircle.iloc[self.point_list[index_][0] + 1, self.point_list[index_][1]] = np.nan
         self.df_incircle.iloc[self.point_list[index_][0] + 1, self.point_list[index_][1] + 1] = np.nan
 
-        self.incircle_position = (self.df_incircle.columns[self.point_list[index_][1]], self.df_incircle.index[self.point_list[index_][0]])
+        self.incircle_position = (self.df_incircle.index[self.point_list[index_][0]], self.df_incircle.columns[self.point_list[index_][1]])
     
     def find_two_point_max(self):
         self.edge_para_df['two_point_mean'] = np.nan
@@ -382,7 +382,7 @@ def plot(a):
     fig = plt.figure(dpi=300)
     plt.imshow(a.data.iloc[10: -9, 8: -10], cmap=cmap, interpolation='nearest', vmin=32, vmax=47,)
     plt.xticks(np.arange(0,121,20), np.arange(-6, 7, 2))
-    plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
+    plt.yticks(np.arange(0,121,20), np.arange(6, -7, -2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
     plt.title("Corneal topography")
@@ -391,7 +391,7 @@ def plot(a):
     fig = plt.figure(dpi=300)
     plt.imshow(a.smooth_data_with_min_for_plot.iloc[10: -9, 8: -10], cmap=cmap, interpolation='nearest', vmin=32, vmax=47,)
     plt.xticks(np.arange(0,121,20), np.arange(-6, 7, 2))
-    plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
+    plt.yticks(np.arange(0,121,20), np.arange(6, -7, -2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
     plt.title("Smoonthed topography and its Kmin")
@@ -400,7 +400,7 @@ def plot(a):
     fig = plt.figure(dpi=300)
     plt.imshow(a.df_incircle.iloc[10: -9, 8: -10], cmap=cmap, interpolation='nearest', vmin=32, vmax=47,)
     plt.xticks(np.arange(0,121,20), np.arange(-6, 7, 2))
-    plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
+    plt.yticks(np.arange(0,121,20), np.arange(6, -7, -2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
     plt.title("Personalized area, max inscribed circle and its center")
@@ -409,7 +409,7 @@ def plot(a):
     fig = plt.figure(dpi=300)
     plt.imshow(a.two_point_zone_for_plot.iloc[10: -9, 8: -10], cmap=cmap, interpolation='nearest', vmin=32, vmax=47,)
     plt.xticks(np.arange(0,121,20), np.arange(-6, 7, 2))
-    plt.yticks(np.arange(0,121,20), np.arange(-6, 7, 2))
+    plt.yticks(np.arange(0,121,20), np.arange(6, -7, -2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
     plt.title("Mergring personalized area, K1 and K2")
@@ -517,7 +517,7 @@ if button1:
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
 
-    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': ['(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')']})
+    df = pd.DataFrame({'A': ['Center of max inscribed circle', 'Ablation area (mm2)'], 'B': ['(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')', str(round(a.area_133std, 6))]})
     with st.expander("**Key Intermediate Variables**", True):
         html = "<table style='border-collapse: collapse;'>"
         for row in df.values:
@@ -578,7 +578,7 @@ elif example:
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
 
-    df = pd.DataFrame({'A': ['Center of max inscribed circle'], 'B': ['(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')']})
+    df = pd.DataFrame({'A': ['Center of max inscribed circle', 'Ablation area (mm2)'], 'B': ['(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')', str(round(a.area_133std, 6))]})
     with st.expander("**Key Intermediate Variables**", True):
         html = "<table style='border-collapse: collapse;'>"
         for row in df.values:
