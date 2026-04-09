@@ -594,6 +594,6 @@ else:
         st.warning("**Please input csv and click 'Calculate' button to start, or click 'Example' button to start a demo!**")
         
         col = st.columns([1, 3, 1])
-        col[1].image("source/loading.gif", use_container_width=True)
+        col[1].image("source/loading2.gif", use_container_width=True)
 
 
