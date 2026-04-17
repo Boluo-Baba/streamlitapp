@@ -492,11 +492,11 @@ if button1:
                     '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                     unsafe_allow_html=True
                 )
-                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
                                'C': ['', "✅"]})
             else:
                 st.markdown("**Personalized area is centered! Default K values from smoothed corneal topography is recommanded!**")
-                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°', f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°'],
+                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
                                'C': ["✅", '']})
                 
             html = "<table style='border-collapse: collapse;'>"
