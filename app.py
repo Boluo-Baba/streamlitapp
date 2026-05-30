@@ -487,7 +487,7 @@ if button1:
                          use_container_width=False,
                          hide_index=True)
 
-            if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
+            if a.eoz_percent < 0.9502 or a.incircle_diatance >= 1.0975:
                 st.markdown(
                     '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                     unsafe_allow_html=True
@@ -509,7 +509,7 @@ if button1:
             st.markdown(html, unsafe_allow_html=True)
 
             st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D > 1.0975mm. Personalized area is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D ≥ 1.0975mm. Personalized area is centered when index P ≥ 0.9502 and index D < 1.0975mm.</p>',
                     unsafe_allow_html=True
             )
     
@@ -548,7 +548,7 @@ elif example:
                          use_container_width=False,
                          hide_index=True)
 
-            if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
+            if a.eoz_percent < 0.9502 or a.incircle_diatance >= 1.0975:
                 st.markdown(
                     '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                     unsafe_allow_html=True
@@ -570,7 +570,7 @@ elif example:
             st.markdown(html, unsafe_allow_html=True)
 
             st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D > 1.0975mm. Personalized area is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
+                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D ≥ 1.0975mm. Personalized area is centered when index P ≥ 0.9502 and index D < 1.0975mm.</p>',
                     unsafe_allow_html=True
             )
     
