@@ -366,7 +366,10 @@ class Patient:
                             count += 1
                         zone_sum += self.data.iloc[i, j]
                         zone_n += 1
-        return zone_sum / zone_n
+        if zone_n != 0:
+            return zone_sum / zone_n
+        else:
+            return 0
         
 colors_list = ['#A2FAFF','#02EFFF','#00C8FE','#008CFF','#0000FD','#0001B3','#003198','#0001B4','#003294','#00627A',
                '#055F57','#006F00','#009A00','#00AB00','#46ED00','#BBFF00','#FFFE00','#FFC404','#F89900','#FB6302',
