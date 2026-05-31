@@ -412,7 +412,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(6, -7, -2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Mergring personalized area, K1 and K2")
+    plt.title("Overlapping personalized area, K1 and K2")
     col2[1].pyplot(fig, use_container_width=True)
 
         
